@@ -38,14 +38,12 @@ struct Point
     bool operator==(Point p);
     bool operator!=(Point p);
 
-
-    static Point cross_product(const Point p1, const Point p2); //calculates cross product in cartesian coordinates
-    static Point unit_vector(const Point p); //calculates unit vector (norm = 1)
-
-    static double norm(const Point p); //calculates euclidean norm
-
 };
 
+Point cross_product(const Point p1, const Point p2); //calculates cross product in cartesian coordinates
+Point unit_vector(const Point p); //calculates unit vector (norm = 1)
+
+double norm(const Point p); //calculates euclidean norm
 
 /*
 A triangle is defined by three vertices and a facet normal. The facet normal should be provided by the STL file but to ensure that

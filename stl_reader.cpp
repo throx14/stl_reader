@@ -32,7 +32,6 @@ const double EPS = 0.001;
 
 using namespace std;
 
-
 //struct Point function implementations
 const string Point::str_rep() const
 {
@@ -63,21 +62,21 @@ bool Point::operator!=(Point p)
 }
 
 //static function
-Point Point::cross_product(const Point p, const Point q)
+Point cross_product(const Point p, const Point q)
 {
     return Point {p.y * q.z - p.z * q.y, p.z * q.x - p.x * q.z, p.x * q.y - p.y * q.x};
 }
 
 //static function
-double Point::norm(const Point p)
+double norm(const Point p)
 {
     return sqrt(p.x * p.x + p.y * p.y + p.z * p.z);
 }
 
 //static function
-Point Point::unit_vector(const Point p)
+Point unit_vector(const Point p)
 {
-    double pnorm = Point::norm(p);
+    double pnorm = norm(p);
 
     //check if norm is zero
     if(fabs(pnorm) < EPS)
@@ -118,13 +117,13 @@ const vector<Point>& Triangle::get_vertices() const
 void Triangle::set_facet_normal(Point normal)
 {
     //check if facet normal to set is unit vector
-    if( (1.0 - fabs(Point::norm(normal))) < EPS)
+    if( (1.0 - fabs(norm(normal))) < EPS)
     {
         facet_normal = normal;
     }//if not, normalize it
     else
     {
-        facet_normal = Point::unit_vector(normal);
+        facet_normal = unit_vector(normal);
     }
 
 }
@@ -142,7 +141,7 @@ Point Triangle::calculate_facet_normal()
         Point vec1 = vertices[1] - vertices[0]; //vertex_0 ------> vertex_1
         Point vec2 = vertices[2] - vertices[0]; //vertex_0 ------> vertex_2
 
-        return Point::unit_vector(Point::cross_product(vec1, vec2)); //order of arguments ensures right handed orientation.
+        return unit_vector(cross_product(vec1, vec2)); //order of arguments ensures right handed orientation.
     }
 
     else
